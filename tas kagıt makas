@@ -1,0 +1,31 @@
+import random
+
+def tas_kagit_makas():
+    secenekler = ['taş', 'kağıt', 'makas']
+    
+    # Bilgisayarın seçimini rastgele belirle
+    bilgisayar_secimi = random.choice(secenekler)
+    
+    # Kullanıcıdan seçimini al
+    kullanici_secimi = input("Taş mı, kağıt mı, makas mı? ").lower()
+    
+    # Kullanıcının girdisini kontrol et
+    while kullanici_secimi not in secenekler:
+        kullanici_secimi = input("Geçersiz seçim. Lütfen tekrar deneyin (taş, kağıt, makas): ").lower()
+    
+    # Sonuçları yazdır
+    print(f"Kullanıcı seçimi: {kullanici_secimi}")
+    print(f"Bilgisayar seçimi: {bilgisayar_secimi}")
+    
+    # Kazananı belirle
+    if kullanici_secimi == bilgisayar_secimi:
+        print("Berabere!")
+    elif (kullanici_secimi == 'taş' and bilgisayar_secimi == 'makas') or \
+         (kullanici_secimi == 'kağıt' and bilgisayar_secimi == 'taş') or \
+         (kullanici_secimi == 'makas' and bilgisayar_secimi == 'kağıt'):
+        print("Kullanıcı kazandı!")
+    else:
+        print("Bilgisayar kazandı!")
+
+# Oyunu başlat
+tas_kagit_makas()
