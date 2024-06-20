@@ -2,30 +2,50 @@ import random
 
 def tas_kagit_makas():
     secenekler = ['taş', 'kağıt', 'makas']
+    kullanici_skor = 0
+    bilgisayar_skor = 0
     
-    # Bilgisayarın seçimini rastgele belirle
-    bilgisayar_secimi = random.choice(secenekler)
+    while True:
+        # Bilgisayarın seçimini rastgele belirle
+        bilgisayar_secimi = random.choice(secenekler)
+        
+        # Kullanıcıdan seçimini al
+        kullanici_secimi = input("Taş mı, kağıt mı, makas mı? ('q' to quit): ").lower()
+        
+        if kullanici_secimi == 'q':
+            print("Oyun sonlandırıldı.")
+            break
+        
+        # Kullanıcının girdisini kontrol et
+        while kullanici_secimi not in secenekler:
+            kullanici_secimi = input("Geçersiz seçim. Lütfen tekrar deneyin (taş, kağıt, makas): ").lower()
+        
+        # Sonuçları yazdır
+        print(f"Kullanıcı seçimi: {kullanici_secimi}")
+        print(f"Bilgisayar seçimi: {bilgisayar_secimi}")
+        
+        # Kazananı belirle
+        if kullanici_secimi == bilgisayar_secimi:
+            print("Berabere!")
+        elif (kullanici_secimi == 'taş' and bilgisayar_secimi == 'makas') or \
+             (kullanici_secimi == 'kağıt' and bilgisayar_secimi == 'taş') or \
+             (kullanici_secimi == 'makas' and bilgisayar_secimi == 'kağıt'):
+            print("Kullanıcı kazandı!")
+            kullanici_skor += 1
+        else:
+            print("Bilgisayar kazandı!")
+            bilgisayar_skor += 1
+        
+        # Skorları yazdır
+        print(f"Kullanıcı Skoru: {kullanici_skor} | Bilgisayar Skoru: {bilgisayar_skor}")
     
-    # Kullanıcıdan seçimini al
-    kullanici_secimi = input("Taş mı, kağıt mı, makas mı? ").lower()
-    
-    # Kullanıcının girdisini kontrol et
-    while kullanici_secimi not in secenekler:
-        kullanici_secimi = input("Geçersiz seçim. Lütfen tekrar deneyin (taş, kağıt, makas): ").lower()
-    
-    # Sonuçları yazdır
-    print(f"Kullanıcı seçimi: {kullanici_secimi}")
-    print(f"Bilgisayar seçimi: {bilgisayar_secimi}")
-    
-    # Kazananı belirle
-    if kullanici_secimi == bilgisayar_secimi:
-        print("Berabere!")
-    elif (kullanici_secimi == 'taş' and bilgisayar_secimi == 'makas') or \
-         (kullanici_secimi == 'kağıt' and bilgisayar_secimi == 'taş') or \
-         (kullanici_secimi == 'makas' and bilgisayar_secimi == 'kağıt'):
-        print("Kullanıcı kazandı!")
+    # Oyun bittiğinde kazananı belirt
+    if kullanici_skor > bilgisayar_skor:
+        print("Tebrikler, kullanıcı kazandı!")
+    elif bilgisayar_skor > kullanici_skor:
+        print("Üzgünüm, bilgisayar kazandı!")
     else:
-        print("Bilgisayar kazandı!")
+        print("Oyun berabere bitti!")
 
 # Oyunu başlat
 tas_kagit_makas()
